@@ -13,14 +13,14 @@ const Home = (props: Props): ReactElement => {
   });
   const [messages, setMessages] = useState<any>([
     { message: "Iam not feeling well", id: 21, sent_by_user: true },
-    { message: "What are you feeling?", id: 21, sent_by_user: false },
-    { message: "Iam a felling a slight headache", id: 21, sent_by_user: true },
-    {
-      message:
-        "We propose taking some pain killers while on you way to see a doctor",
-      id: 21,
-      sent_by_user: false,
-    },
+    // { message: "What are you feeling?", id: 21, sent_by_user: false },
+    // { message: "Iam a felling a slight headache", id: 21, sent_by_user: true },
+    // {
+    //   message:
+    //     "We propose taking some pain killers while on you way to see a doctor",
+    //   id: 21,
+    //   sent_by_user: false,
+    // },
   ]);
 
   const send_message_Handler = async () => {
