@@ -2,17 +2,22 @@ import { ReactElement, useState } from "react";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import OutGoingMessage from "@components/Messageitems/OutGoingMessage";
 import IncomingMessage from "@components/Messageitems/IncomingMessage";
+import axios from "axios";
+import { apiUrl } from "../../utils/apiUrl";
+import { v4 as uuid } from "uuid";
 
 type Props = {};
 
 const Home = (props: Props): ReactElement => {
   const [loading, setLoading] = useState(false);
+  const unique_id = uuid();
+  const small_id = unique_id.slice(0, 8);
   const [message, setMessage] = useState<any>({
     message: "",
     sent_by_user: false,
   });
   const [messages, setMessages] = useState<any>([
-    { message: "Iam not feeling well", id: 21, sent_by_user: true },
+    // { message: "Iam not feeling well", id: 21, sent_by_user: true },
     // { message: "What are you feeling?", id: 21, sent_by_user: false },
     // { message: "Iam a felling a slight headache", id: 21, sent_by_user: true },
     // {
@@ -27,6 +32,18 @@ const Home = (props: Props): ReactElement => {
     try {
       setLoading(true);
       setMessages((old_messages: any) => [...old_messages, message]);
+      const { data } = await axios.post(`${apiUrl}/send/message`, {
+        userText: message.message,
+        userId: small_id,
+      });
+      console.log(data.response[0].queryResult.fulfillmentText);
+      setMessages((old_messages: any) => [
+        ...old_messages,
+        {
+          message: data.response[0].queryResult.fulfillmentText,
+          sent_by_user: false,
+        },
+      ]);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -39,12 +56,13 @@ const Home = (props: Props): ReactElement => {
       <div className="rounded-lg relative px-4 bg-white mx-auto max-w-5xl w-full shadow">
         <div className="heading w-full">
           <p className="  text-center p-4 text-lg text-slate-700 font-semibold">
-            Healthcare Chat
+            Appex Medical helper
           </p>
         </div>
         {/* chat items */}
         <div className="flex flex-col w-full">
-          <IncomingMessage message="Hello. How may i help you today? " />
+          <IncomingMessage message="Hello. I'm Madeline " />
+          <IncomingMessage message="How may I assist you today?" />
           {messages?.map((message: any, index: number) => (
             <>
               {message.sent_by_user ? (
