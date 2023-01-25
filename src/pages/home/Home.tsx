@@ -52,7 +52,7 @@ const Home = (props: Props): ReactElement => {
   };
 
   return (
-    <div className="grid min-h-screen  md:p-8 p-2 bg-slate-100">
+    <div className="grid h-screen  md:p-8 p-2 pb-20 bg-slate-100">
       <div className="rounded-lg relative px-4 bg-white mx-auto max-w-5xl w-full shadow">
         <div className="heading w-full">
           <p className="  text-center p-4 text-lg text-slate-700 font-semibold">
@@ -60,9 +60,10 @@ const Home = (props: Props): ReactElement => {
           </p>
         </div>
         {/* chat items */}
-        <div className="flex flex-col w-full">
+        <div className="flex h-full flex-col w-full">
           <IncomingMessage message="Hello. I'm Madeline " />
           <IncomingMessage message="How may I assist you today?" />
+   
           {messages?.map((message: any, index: number) => (
             <>
               {message.sent_by_user ? (
