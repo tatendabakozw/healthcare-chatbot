@@ -3,7 +3,7 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import OutGoingMessage from "@components/Messageitems/OutGoingMessage";
 import IncomingMessage from "@components/Messageitems/IncomingMessage";
 import axios from "axios";
-import { apiUrl } from "../../utils/apiUrl";
+// import { apiUrl } from "../../utils/apiUrl";
 import { v4 as uuid } from "uuid";
 
 type Props = {};
@@ -32,7 +32,7 @@ const Home = (props: Props): ReactElement => {
     try {
       setLoading(true);
       setMessages((old_messages: any) => [...old_messages, message]);
-      const { data } = await axios.post(`${apiUrl}/send/message`, {
+      const { data } = await axios.post(`https://chatbot-server-wf99.onrender.com/send/message`, {
         userText: message.message,
         userId: small_id,
       });
