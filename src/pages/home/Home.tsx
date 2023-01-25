@@ -44,6 +44,9 @@ const Home = (props: Props): ReactElement => {
           sent_by_user: false,
         },
       ]);
+      setMessage({
+        message: ''
+      })
       setLoading(false);
     } catch (error) {
       setLoading(false);
